@@ -8,7 +8,7 @@
   "scripts": {
     "build": "medusa build",
     "seed": "medusa exec ./src/scripts/seed.ts",
-    "start": "medusa db:setup && medusa start",
+    "start": "node -e \"require('fs').writeFileSync('.env', `DATABASE_URL=${process.env.DATABASE_URL}\\nREDIS_URL=${process.env.REDIS_URL}\\nSTRIPE_API_KEY=${process.env.STRIPE_API_KEY||''}\\nSTRIPE_WEBHOOK_SECRET=${process.env.STRIPE_WEBHOOK_SECRET||''}\\nJWT_SECRET=${process.env.JWT_SECRET||''}\\nCOOKIE_SECRET=${process.env.COOKIE_SECRET||''}\\nPORT=${process.env.PORT||9000}\\n`)\" && medusa db:setup && medusa start",
     "dev": "medusa develop",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
     "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
